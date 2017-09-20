@@ -8,15 +8,15 @@ import time
 import matplotlib.pyplot as plt
 
 #Taking step of 6.28/100 = 0.0628
-x = 0.0628
+x = 0.0209
 
 #Generating 100 points
-x_x=np.arange(0,100)
+x_x=np.arange(0,300)
 y = np.arange(0)
 
 #print x
 #Taking sine function here to train and test to data
-for i in range (0,100):
+for i in range (0,300):
     s = math.sin((x_x[np.array(i)]) * (x))
     #s = s * ((x_x[np.array(i)]) * (x))
     y = np.append(y,s)
@@ -40,8 +40,8 @@ while (test_num.size < 30):
         test_num = np.append(test_num,ran_num)
 '''
 ##This will be the new Algorithm
-for i in range(100):
-    if (i%3 == 1 and test_num.size < 30 ):
+for i in range(300):
+    if (i%3 == 1 and test_num.size < 90 ):
         test_num = np.append(test_num,i)
     else:
         inp_num = np.append(inp_num,i)
@@ -70,7 +70,7 @@ time_gen_arr = np.arange(0)
 rms = 1
 for gen in range(3,35,2):
     start = time.time()
-    w = np.random.rand(35)
+    w = np.random.rand(300)
     times = 1000
     pad_val = (gen-1)/2
     w_zero = np.array([0])
@@ -79,17 +79,17 @@ for gen in range(3,35,2):
         w = np.append(w,w_zero)
         w = np.append(w,w_zero)
 
-    while(rms > 0.01 and times != 0):
+    while(rms > 0.01):
         w_z = np.arange(0)
-        for j in range(0,70):
-            q_val = j/2
+        for j in range(0,210):
+            #q_val = j/2
             #print q_val
             for k in range(gen):
                 if(k == 0):
-                    w_val = (w_val + w[np.array(k + q_val)] * 0.25)
+                    w_val = (w_val + w[np.array(k + j)] * 0.25)
                 if(k == gen-1):
-                    w_val = (w_val + w[np.array(k + q_val)] * 0.75)
-                w_val = w_val + w[np.array(k + q_val)]
+                    w_val = (w_val + w[np.array(k + j)] * 0.75)
+                w_val = w_val + w[np.array(k + j)]
             w_y_val = w_val/gen
             #w_trained = np.append(w_trained,w_val)
             y_val = (math.sin(inp_num[np.array(j)] * x))
@@ -103,17 +103,17 @@ for gen in range(3,35,2):
             corrected_val = err_val/gen
             for k in range(gen):
                 if(k == 0):
-                    w[np.array(k + q_val)] = (w[np.array(k + q_val)]) + (corrected_val * 0.25)
+                    w[np.array(k + j)] = (w[np.array(k + j)]) + (corrected_val * 0.25)
                 if(k == gen-1):
-                    w[np.array(k + q_val)] = w[np.array(k + q_val)] + (corrected_val * 0.75)
-                w[np.array(k + q_val)] = w[np.array(k + q_val)] + corrected_val
+                    w[np.array(k + j)] = w[np.array(k + j)] + (corrected_val * 0.75)
+                w[np.array(k + j)] = w[np.array(k + j)] + corrected_val
             w_val = 0.0
             #print w, q_val
             #err_val = 0.0
             #w_val = 0.0
         #print w.size
         rms = np.mean(err_arr**2)
-        times = times -1
+        #times = times -1
 
     print gen
     if gen==3:
@@ -131,10 +131,10 @@ w_new = w_weight_save[1::2]
 new_gen = 3
 test_val = 0.0
 w_new_arr = np.arange(0)
-for j in range(0,30):
-    q_val = j/2
+for j in range(0,90):
+    #q_val = j/2
     #test_num[np.array(q_val)]
-    w_avg = w_new[np.array(q_val)] + w_new[np.array(q_val - 1)] + w_new[np.array(q_val + 1)]
+    w_avg = w_new[np.array(j)] + w_new[np.array(j - 1)] + w_new[np.array(j + 1)]
     w_avg = w_avg / new_gen
     w_new_arr = np.append(w_new_arr,w_avg)
 new_test_data = test_num * x
