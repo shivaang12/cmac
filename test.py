@@ -1,12 +1,21 @@
+#Continuous cmac
+#Author - Shivang Patel
+
 import numpy as np
 import math
 import random
 import time
 import matplotlib.pyplot as plt
+
+#Taking step of 6.28/100 = 0.0628
 x = 0.0628
+
+#Generating 100 points
 x_x=np.arange(0,100)
 y = np.arange(0)
+
 #print x
+#Taking sine function here to train and test to data
 for i in range (0,100):
     s = math.sin((x_x[np.array(i)]) * (x))
     #s = s * ((x_x[np.array(i)]) * (x))
@@ -37,18 +46,22 @@ for i in range(100):
     else:
         inp_num = np.append(inp_num,i)
 
+#Rearranging the order from assending to descending order
 inp_num = np.sort(inp_num)
 test_num = np.sort(test_num)
+
 #print inp_num.size
 #Defining Weights
 #w_save = np.arange(0)
+
+#Initializing some usefull variables
 w_val = 0.0
 w_num = 1
 inc_val = 0
 w_zero = np.arange(0.0)
 w_save = w_zero
 err_val = 0.0
-flip = 1
+#flip = 1
 q_val = 0
 err_arr = np.arange(0)
 rms_arr = np.arange(0)
@@ -149,7 +162,7 @@ plt.show()
 #plt.plot()
 
 
-
+#SOME UNUSEFULL CODE
 
         #break
     #break
