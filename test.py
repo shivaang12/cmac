@@ -134,7 +134,7 @@ w_new_arr = np.arange(0)
 for j in range(0,90):
     #q_val = j/2
     #test_num[np.array(q_val)]
-    w_avg = w_new[np.array(j)] + w_new[np.array(j - 1)] + w_new[np.array(j + 1)]
+    w_avg = w_new[np.array(j)] + (w_new[np.array(j - 1)] * 0.25) + (w_new[np.array(j + 1)] * 0.75)
     w_avg = w_avg / new_gen
     w_new_arr = np.append(w_new_arr,w_avg)
 new_test_data = test_num * x
