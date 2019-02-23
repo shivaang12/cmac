@@ -87,9 +87,10 @@ for gen in range(3,35,2):
             for k in range(gen):
                 if(k == 0):
                     w_val = (w_val + w[np.array(k + q_val)] * 0.25)
-                if(k == gen-1):
+                elif(k == gen-1):
                     w_val = (w_val + w[np.array(k + q_val)] * 0.75)
-                w_val = w_val + w[np.array(k + q_val)]
+                else:
+                    w_val = w_val + w[np.array(k + q_val)]
             w_y_val = w_val/gen
             #w_trained = np.append(w_trained,w_val)
             y_val = (math.sin(inp_num[np.array(j)] * x))
@@ -104,9 +105,10 @@ for gen in range(3,35,2):
             for k in range(gen):
                 if(k == 0):
                     w[np.array(k + q_val)] = (w[np.array(k + q_val)]) + (corrected_val * 0.25)
-                if(k == gen-1):
+                elif(k == gen-1):
                     w[np.array(k + q_val)] = w[np.array(k + q_val)] + (corrected_val * 0.75)
-                w[np.array(k + q_val)] = w[np.array(k + q_val)] + corrected_val
+                else:
+                    w[np.array(k + q_val)] = w[np.array(k + q_val)] + corrected_val
             w_val = 0.0
             #print w, q_val
             #err_val = 0.0
@@ -139,7 +141,8 @@ for j in range(0,30):
     w_new_arr = np.append(w_new_arr,w_avg)
 new_test_data = test_num * x
 x_final = x_x * x
-plt.plot(new_test_data,w_new_arr,'ro',x_final,y)
+# plt.plot(new_test_data,w_new_arr,'ro',x_final,y)
+plt.plot(new_test_data,w_new_arr, 'o')
 plt.xlabel('Radians')
 plt.ylabel('Sin(x)')
 plt.show()
@@ -161,17 +164,3 @@ plt.ylabel('Error')
 plt.show()
 #plt.plot()
 
-
-#SOME UNUSEFULL CODE
-
-        #break
-    #break
-
-
-
-    #for i in range(0,35):
-    #    for j in range(2):
-    #        for k in range(gen):
-    #            w_val = w_val + w[np.array(k)]
-    #        w_val = w_val / gen
-    #        print w_val
